@@ -16,7 +16,7 @@ deno serve -A --port 8888 --host "[::]" qr-receipt-tz.js
 
 ## setup
 
-- domain setting
+- domain setting (ex. qr-receipt-tz.sabae.cc )
 a qr-receipt-tz 118.27.2.240
 
 - on server
