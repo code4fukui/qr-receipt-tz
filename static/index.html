@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
+<title>Tanzania QR receipt reader</title>
+</head>
+<script type="module" src="https://code4fukui.github.io/qr-code-reader/qr-code-reader.js"></script>
+
+<h1>Tanzania QR receipt reader</h1>
+
+<qr-code-reader id=qrr></qr-code-reader>
+<button id=btn>stop</button><br>
+<input id=res style="width:95vw"><br>
+<br>
+
+<select id=selrate>
+  <option value="¥,17.30,0">¥ (17.30 TZS sh/yen)</option>
+  <option value="$,2650.00,2">$ (2,650.00 TZS sh/dollar)</option>
+</select><br>
+<div id=divitems></div>
+<div id=divinfo></div>
+
+<!--
+<textarea id=ta></textarea>
+-->
+
+<hr>
+<a href=https://github.com/code4fukui/qr-receipt-tz/>src on GitHub</a><br>
+
+<script type="module">
+import { fetchJSON } from "https://js.sabae.cc/fetchJSON.js";
+import { CSV } from "https://js.sabae.cc/CSV.js";
+import { Num, addComma, removeComma, fixnum, fixfloat } from "https://code4fukui.github.io/Num/Num.js";
+
+const getVcode = (s) => {
+  if (s.indexOf("_") >= 0) return s;
+  const hhmmss = prompt("input TIME as hhmmss (ex. 13:00:32 → 130032)");
+  return s + "_" + hhmmss;
+};
+
+const obj2array = (obj) => {
+  const o = Object.entries(obj).map(i => ({ name: i[0], value: i[1] }));
+  return o;
+};
+
+let bkjson = null;
+const show = (json) => {
+  if (!json) {
+    json = bkjson;
+  } else {
+    bkjson = json;
+  }
+  if (!json) return;
+
+  //ta.value = JSON.stringify(json, null, 2);
+
+  const info = Object.assign({}, json);
+  const items = info["ITEMS"];
+
+  const rate2 = selrate.value.split(",");
+  const srate = rate2[0];
+  const rate = parseFloat(rate2[1]);
+  const ratefixed = parseInt(rate2[2]);
+  const transPrice = (s) => {
+    const a = parseFloat(removeComma(s)) / rate;
+    return a;
+  };
+  const price2str = (a) => {
+    return srate + addComma(a, ratefixed);    
+  };
+
+  items.forEach(i => {
+    const a = transPrice(i.Amount);
+    i["price"] = price2str(a);
+    i["price(unit)"] = price2str(a / parseInt(i.Qty));
+  });
+
+  info["TOTAL INCL OF TAX2"] = price2str(transPrice(info["TOTAL INCL OF TAX"]));
+
+  delete info["ITEMS"];
+  divitems.innerHTML = divinfo.innerHTML = "";
+  divitems.appendChild(CSV.makeTable(CSV.fromJSON(items)));
+  divinfo.appendChild(CSV.makeTable(CSV.fromJSON(obj2array(info))));
+};
+
+selrate.onchange = () => show();
+
+qrr.oninput = async (s) => {
+  res.value = s.data;
+  qrr.stop();
+  const n = s.data.lastIndexOf("/");
+  const vcode = getVcode(s.data.substring(n + 1));
+  const json = await fetchJSON("/api/getReceipt", vcode);
+  console.log(json);
+  show(json);
+};
+btn.onclick = () => qrr.stop();
+
+const stest = `{
+  "RECEIPT ISSUER": "MAISHA SUPERMARKET LIMITED",
+  "P.O BOX": "40121",
+  "MOBILE": "0764767056",
+  "TIN": "127509506",
+  "VRN": "40022966K",
+  "SERIAL NO": "03TZ253000316",
+  "UIN": "03300SMM-E3-12761230712750950603TZ253000316",
+  "TAX OFFICE": "Tax Office Medium Taxpayers Division",
+  "CUSTOMER NAME": "n/a",
+  "CUSTOMER ID TYPE": "NIL",
+  "CUSTOMER ID": "n/a",
+  "CUSTOMER MOBILE": "n/a",
+  "RECEIPT NO": "166009",
+  "Z NUMBER": "439/401",
+  "RECEIPT DATE": "2024-11-13",
+  "RECEIPT TIME": "21:20:46",
+  "RECEIPT VERIFICATION CODE": "96D5B7166009",
+  "ITEMS": [
+    {
+      "Description": "MUNAWAR CASHEWN",
+      "Qty": "2",
+      "Amount": "99,000.00"
+    },
+    {
+      "Description": "MATOBORWA KASHA",
+      "Qty": "11",
+      "Amount": "30,800.00"
+    },
+    {
+      "Description": "MUNAWAR CASHEWN",
+      "Qty": "1",
+      "Amount": "13,800.00"
+    },
+    {
+      "Description": "ROYAL SALTED CA",
+      "Qty": "1",
+      "Amount": "14,500.00"
+    },
+    {
+      "Description": "ROYAL SALTED CA",
+      "Qty": "1",
+      "Amount": "14,500.00"
+    },
+    {
+      "Description": "ROYAL CASHEWNUT",
+      "Qty": "1",
+      "Amount": "5,500.00"
+    },
+    {
+      "Description": "NR CASHEW NUTS",
+      "Qty": "1",
+      "Amount": "4,800.00"
+    },
+    {
+      "Description": "NR CASHEW NUTS",
+      "Qty": "1",
+      "Amount": "4,800.00"
+    },
+    {
+      "Description": "NR CASHEW NUTS",
+      "Qty": "1",
+      "Amount": "4,800.00"
+    },
+    {
+      "Description": "NR CASHEW NUTS",
+      "Qty": "1",
+      "Amount": "4,800.00"
+    },
+    {
+      "Description": "ROYAL CASHEWNUT",
+      "Qty": "1",
+      "Amount": "5,500.00"
+    },
+    {
+      "Description": "ROYAL CASHEWNUT",
+      "Qty": "1",
+      "Amount": "5,500.00"
+    },
+    {
+      "Description": "MUNAWAR CASHEWN",
+      "Qty": "1",
+      "Amount": "13,800.00"
+    },
+    {
+      "Description": "ROYAL CASHEWNUT",
+      "Qty": "1",
+      "Amount": "5,500.00"
+    },
+    {
+      "Description": "ROYAL CASHEWNUT",
+      "Qty": "1",
+      "Amount": "5,500.00"
+    },
+    {
+      "Description": "KLM GROUND COFF",
+      "Qty": "1",
+      "Amount": "13,500.00"
+    },
+    {
+      "Description": "KLM GROUND COFF",
+      "Qty": "1",
+      "Amount": "13,500.00"
+    },
+    {
+      "Description": "KLM BEANS COFFE",
+      "Qty": "1",
+      "Amount": "13,500.00"
+    },
+    {
+      "Description": "KLM BEANS COFFE",
+      "Qty": "1",
+      "Amount": "13,500.00"
+    },
+    {
+      "Description": "NR CASHEW NUTS",
+      "Qty": "1",
+      "Amount": "4,800.00"
+    },
+    {
+      "Description": "KIT KAT 2 FINGE",
+      "Qty": "1",
+      "Amount": "1,800.00"
+    },
+    {
+      "Description": "MINI BAG",
+      "Qty": "2",
+      "Amount": "1,200.00"
+    }
+  ],
+  "TOTAL EXCL OF TAX": "265,016.95",
+  "TAX RATE A (18%)": "29,883.05",
+  "TOTAL TAX": "29,883.05",
+  "TOTAL INCL OF TAX": "294,900.00"
+}`;
+show(JSON.parse(stest));
+
+</script>
+
+<style>
+#divitems, #divinfo {
+  display: inline-block;
+  vertical-align: top;
+}
+table {
+  border-collapse: collapse;
+  margin: .8em;
+}
+td, th {
+  border: 1px solid black;
+  padding: 0.1em 0.5em;
+  text-align: right;
+}
+</style>
+</body></html>
