@@ -228,7 +228,10 @@ const stest = `{
   "TOTAL TAX": "29,883.05",
   "TOTAL INCL OF TAX": "294,900.00"
 }`;
-show(JSON.parse(stest));
+
+if (document.location.hash == "#test") {
+  show(JSON.parse(stest));
+}
 
 </script>
 
