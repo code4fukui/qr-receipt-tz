@@ -1,0 +1,135 @@
+{
+  "RECEIPT ISSUER": "MAISHA SUPERMARKET LIMITED",
+  "P.O BOX": "40121",
+  "MOBILE": "0764767056",
+  "TIN": "127509506",
+  "VRN": "40022966K",
+  "SERIAL NO": "03TZ253000316",
+  "UIN": "03300SMM-E3-12761230712750950603TZ253000316",
+  "TAX OFFICE": "Tax Office Medium Taxpayers Division",
+  "CUSTOMER NAME": "n/a",
+  "CUSTOMER ID TYPE": "NIL",
+  "CUSTOMER ID": "n/a",
+  "CUSTOMER MOBILE": "n/a",
+  "RECEIPT NO": "166009",
+  "Z NUMBER": "439/401",
+  "RECEIPT DATE": "2024-11-13",
+  "RECEIPT TIME": "21:20:46",
+  "RECEIPT VERIFICATION CODE": "96D5B7166009",
+  "ITEMS": [
+    {
+      "Description": "MUNAWAR CASHEWN",
+      "Qty": "2",
+      "Amount": "99,000.00"
+    },
+    {
+      "Description": "MATOBORWA KASHA",
+      "Qty": "11",
+      "Amount": "30,800.00"
+    },
+    {
+      "Description": "MUNAWAR CASHEWN",
+      "Qty": "1",
+      "Amount": "13,800.00"
+    },
+    {
+      "Description": "ROYAL SALTED CA",
+      "Qty": "1",
+      "Amount": "14,500.00"
+    },
+    {
+      "Description": "ROYAL SALTED CA",
+      "Qty": "1",
+      "Amount": "14,500.00"
+    },
+    {
+      "Description": "ROYAL CASHEWNUT",
+      "Qty": "1",
+      "Amount": "5,500.00"
+    },
+    {
+      "Description": "NR CASHEW NUTS",
+      "Qty": "1",
+      "Amount": "4,800.00"
+    },
+    {
+      "Description": "NR CASHEW NUTS",
+      "Qty": "1",
+      "Amount": "4,800.00"
+    },
+    {
+      "Description": "NR CASHEW NUTS",
+      "Qty": "1",
+      "Amount": "4,800.00"
+    },
+    {
+      "Description": "NR CASHEW NUTS",
+      "Qty": "1",
+      "Amount": "4,800.00"
+    },
+    {
+      "Description": "ROYAL CASHEWNUT",
+      "Qty": "1",
+      "Amount": "5,500.00"
+    },
+    {
+      "Description": "ROYAL CASHEWNUT",
+      "Qty": "1",
+      "Amount": "5,500.00"
+    },
+    {
+      "Description": "MUNAWAR CASHEWN",
+      "Qty": "1",
+      "Amount": "13,800.00"
+    },
+    {
+      "Description": "ROYAL CASHEWNUT",
+      "Qty": "1",
+      "Amount": "5,500.00"
+    },
+    {
+      "Description": "ROYAL CASHEWNUT",
+      "Qty": "1",
+      "Amount": "5,500.00"
+    },
+    {
+      "Description": "KLM GROUND COFF",
+      "Qty": "1",
+      "Amount": "13,500.00"
+    },
+    {
+      "Description": "KLM GROUND COFF",
+      "Qty": "1",
+      "Amount": "13,500.00"
+    },
+    {
+      "Description": "KLM BEANS COFFE",
+      "Qty": "1",
+      "Amount": "13,500.00"
+    },
+    {
+      "Description": "KLM BEANS COFFE",
+      "Qty": "1",
+      "Amount": "13,500.00"
+    },
+    {
+      "Description": "NR CASHEW NUTS",
+      "Qty": "1",
+      "Amount": "4,800.00"
+    },
+    {
+      "Description": "KIT KAT 2 FINGE",
+      "Qty": "1",
+      "Amount": "1,800.00"
+    },
+    {
+      "Description": "MINI BAG",
+      "Qty": "2",
+      "Amount": "1,200.00"
+    }
+  ],
+  "TOTAL EXCL OF TAX": "265,016.95",
+  "TAX RATE A (18%)": "29,883.05",
+  "TOTAL TAX": "29,883.05",
+  "TOTAL INCL OF TAX": "294,900.00"
+}
